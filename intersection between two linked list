@@ -1,0 +1,63 @@
+// in this programe we are trying to find intersection between two linked list
+// the problem with this programme is that  cannot find multiple intersection points with this approach
+
+int lenght(Noad*head) // this function takes the head node as an input and give the length of the linked list
+{
+	int length = 0;
+	Noad* temp = head;
+	while (temp!=NULL)
+	{
+		length++;
+		temp = temp->next;
+	}
+	return length;
+}
+Noad* movenode(Noad*head,int k) // this function is used to move the head pointer tothe kth node for making them the same length
+{								// it take (k) as a perameter to move the node and return the new node address
+	Noad* temp = head;
+	while (k--)
+	{
+		temp = temp->next;
+	}
+	return temp;
+}
+Noad* intersct(Noad*head1,Noad*head2)
+{
+	int l1 = lenght(head1);
+	int l2 = lenght(head2);
+	if (l1>l2)
+	{
+		int k = l1 - l2;
+		Noad* ptr1 = movenode(head1,k);
+		Noad* ptr2 = head2;
+		//Noad* previous = NULL;
+		while (ptr1!=NULL)
+		{
+			//previous = ptr1;
+			if (ptr1==ptr2)
+			{
+				return ptr1;
+			}
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
+		}
+	}
+	else
+	{
+		int k = l2 - l1;
+		Noad* ptr1 = movenode(head2, k);
+		Noad* ptr2 = head1;
+		//Noad* previous = NULL;
+		while (ptr1 != NULL)
+		{
+			//previous = ptr1->next;
+			if (ptr1 == ptr2)
+			{
+				return ptr1;
+			}
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
+		}
+	}
+	return NULL;
+}
