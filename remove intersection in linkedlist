@@ -1,0 +1,64 @@
+//in this function we don't really remove the intersection point
+// but we get the address of the intersection point and the address of the pointer which came before the intersection
+// which we can use to remove the intersection 
+int lenght(Noad*head)
+{
+	int length = 0;
+	Noad* temp = head;
+	while (temp!=NULL)
+	{
+		length++;
+		temp = temp->next;
+	}
+	return length;
+}
+Noad* movenode(Noad*head,int k)
+{
+	Noad* temp = head;
+	while (k--)
+	{
+		temp = temp->next;
+	}
+	return temp;
+}
+void Remov_intersct(Noad* head1, Noad* head2,Noad*&pt1,Noad*&pt2,Noad*&pt3)
+{
+	int l1 = lenght(head1);
+	int l2 = lenght(head2);
+	if (l1 > l2)
+	{
+		int k = l1 - l2;
+		Noad* ptr1 = movenode(head1, k);
+		Noad* ptr2 = head2;
+		while (ptr1 != NULL)
+		{
+			if (ptr1->next == ptr2->next)
+			{
+				pt1 = ptr1;
+				pt2 = ptr2;
+				pt3 = ptr1->next;
+				return;
+			}
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
+		}
+	}
+	else
+	{
+		int k = l2 - l1;
+		Noad* ptr1 = movenode(head2, k);
+		Noad* ptr2 = head1;
+		while (ptr1 != NULL)
+		{
+			if (ptr1->next == ptr2->next)
+			{
+				pt1 = ptr1;
+				pt2 = ptr2;
+				pt3 = ptr1->next;
+				return;
+			}
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
+		}
+	}
+}
