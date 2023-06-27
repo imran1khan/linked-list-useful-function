@@ -1,0 +1,18 @@
+// this is a simple sorting function for linked list
+void sortll(Noad*& head)
+{
+	Noad* slow = head;
+	while (slow != NULL && slow->next != NULL)
+	{
+		Noad* fast = slow->next;
+		while (fast != NULL)
+		{
+			if (slow->value > fast->value)
+			{
+				swap(slow->value, fast->value);
+			}
+			fast = fast->next;
+		}
+		slow = slow->next;
+	}
+}
