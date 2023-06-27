@@ -1,0 +1,25 @@
+// this one function is very very mportant
+// given the head of the linked list, 
+//reverse the nodes of the list k node at a time and return the linked list
+
+Noad* revers_linklist_ktime(Noad*&head,int k)
+{
+	Noad* prevptr = NULL;
+	Noad* currentptr = head;
+	int counter = 0;// for counting first k noads
+	while (currentptr!=NULL && counter<k)// reversing first k noads
+	{
+		Noad* nestptr = currentptr->next;
+		currentptr->next = prevptr;
+		prevptr = currentptr;
+		currentptr = nestptr;
+		counter++;
+	}
+	// currentptr is going to give me the next k+1 noad
+	if (currentptr!=NULL)
+	{
+		Noad* newhead = revers_linklist_ktime(currentptr, k);// recurssive call
+		head->next = newhead;
+	}
+	return prevptr; // prevptr will give us the new head of the linked list
+}
