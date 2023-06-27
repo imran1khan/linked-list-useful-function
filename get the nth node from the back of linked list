@@ -1,0 +1,53 @@
+//there are two ways to get the nth last node from the linked list
+// first by using the length
+// second by using two pointers
+// both method are here the first method is below;
+int getnthfromlast(Noad*head,int num)
+{
+	Noad* temp = head;
+	int c = 0;
+	while (temp!=NULL)
+	{
+		c++;
+		temp = temp->next;
+	}
+	if (num>c || num<0)
+	{
+		return -1;
+	}
+	int index = c - num;
+	temp = head;
+	while (index--)
+	{
+		temp = temp->next;
+	}
+	int val = temp->value;
+	return val;
+}
+////// by using two pointers method
+int getnthfromlast2(Noad* head, int num)
+{
+	//using two pointers
+	if (num<=0 || head==NULL)
+	{
+		return -1;
+	}
+	Noad* first = head;
+	int n1 = num;
+	while (n1--)
+	{
+		if (first==NULL)
+		{
+			return -1;
+		}
+		first = first->next;
+	}
+	Noad* second = head;
+	while (first!=NULL)
+	{
+		first = first->next;
+		second = second->next;
+	}
+	int val = second->value;
+	return val;
+}
